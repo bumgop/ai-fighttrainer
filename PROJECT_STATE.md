@@ -93,7 +93,7 @@ The system is intentionally minimalist in visuals and scope to prioritize correc
 - result category
 - timing_ms (nullable, window-relative)
 
-This minigame serves as a **canonical implementation pattern** for all remaining MVP minigames, alongside the Hit-Confirm minigame which demonstrates decision-making mechanics.
+This minigame serves as a **canonical implementation pattern** for all remaining MVP minigames, alongside the Hit-Confirm and Whiff Punish minigames which demonstrate decision-making and temporal recognition mechanics.
 
 ### 5. Hit-Confirm Minigame (Decision-Making MVP)
 
@@ -115,13 +115,35 @@ This minigame serves as a **canonical implementation pattern** for all remaining
 
 This minigame validates decision-making under uncertainty and input discipline.
 
+### 6. Whiff Punish Minigame (Temporal Opportunity Recognition)
+
+**Gameplay Logic**
+- Enemy performs attack with distinct phases: Startup (200ms) → Active (150ms) → Recovery (300ms)
+- Visual frame data progress bar shows timing progression through attack phases
+- Player must attack during recovery window for correct punish
+- Random delay before attack starts to prevent anticipation
+
+**Logged Outcomes**
+- correct_whiff_punish (attack during recovery)
+- early_whiff_punish (attack during startup)
+- unsafe_whiff_punish (attack during active frames)
+- late_whiff_punish (attack after recovery)
+- missed_punish (no attack at all)
+
+**Logged Metrics (per trial)**
+- outcome category
+- input_time_ms (nullable)
+- phase_at_input (startup/active/recovery/post-recovery)
+- window_offset_ms (timing relative to recovery window start)
+
+This minigame evaluates temporal opportunity recognition and punish timing.
+
 ---
 
 ## Known Gaps / TODOs
 
 ### Gameplay
 - Implement remaining MVP minigames:
-  - Whiff Punish Timing
   - Defense Under Pressure
 
 ### Telemetry

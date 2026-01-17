@@ -19,7 +19,7 @@ public partial class GameSession : Node
         _timer.StartSession();
         _telemetry.StartSession(_sessionId);
 
-        var hitConfirmTest = GetNode<HitConfirmController>("HitConfirm");
+        var hitConfirmTest = GetNode<WhiffPunishController>("WhiffPunish");
         StartMinigame(hitConfirmTest);
 
         GD.Print($"Session started: {_sessionId}");
