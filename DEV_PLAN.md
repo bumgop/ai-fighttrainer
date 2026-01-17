@@ -193,26 +193,62 @@ Phase 2 is considered complete when:
 
 ---
 
-## Phase 3 — Additional MVP Minigames
-
-### Objective
-Expand the system to include the remaining MVP minigames, validating reusability of core systems.
-
----
-
-### Scope Summary
-- Hit-Confirm Challenge
-- Whiff Punish Timing
-- Defense Under Pressure
-
-Each minigame:
-- Uses shared input + telemetry systems
-- Emits minigame-specific metrics
+## Phase 3 — Minigame Implementation (Gameplay + Telemetry)
+Phase 3 is broken into strictly ordered sub-phases. Each sub-phase implements one additional minigame, fully wired into the shared input, telemetry, and session systems.
+No new minigame may begin until the previous sub-phase has passed acceptance.
 
 ---
 
-### Status
-⏳ Not Started
+### Phase 3.1 — Hit-Confirm Minigame
+
+#### Objective
+Implement a minigame that evaluates:
+- Player decision-making under uncertainty
+- Input discipline (confirm vs autopilot)
+- Ability to withhold action on non-confirmed hits
+
+This minigame establishes how branching outcomes are handled in telemetry.
+
+#### Scope
+- Visual cue indicating "hit" or "block" state
+- Player attack input window
+- Distinct outcomes for:
+	- Correct hit-confirm
+	- False hit-confirm
+	- Missed hit-confirm
+
+#### Deliverables
+- Standalone playable minigame scene
+- Shared input system integration
+- Per-attempt telemetry records
+- Automatic minigame completion logic
+
+#### Non-Goals
+- No combo systems
+- No variable hit-stun modeling
+- No difficulty scaling
+
+#### Acceptance Criteria
+- Player outcomes are unambigious and repeatable
+- Telemetry cleanly distinguishes decision errors
+- Minigame end is reliably triggered
+
+#### Status
+⏳ In Progress
+
+---
+
+### Phase 3.2 - Whiff Punish Minigame
+(After Phase 3.1 acceptance))
+#### Status
+❌ Not Started
+
+---
+
+### Phase 3.3 - Defense Under Pressure Minigame
+(After Phase 3.2 acceptance)))
+#### Status
+❌ Not Started
 
 ---
 
@@ -233,7 +269,7 @@ Analyze collected telemetry to produce explainable player insights.
 ---
 
 ### Status
-⏳ Not Started
+❌ Not Started
 
 ---
 
@@ -253,5 +289,5 @@ Convert analytics output into clear, actionable player-facing feedback.
 ---
 
 ### Status
-⏳ Not Started
+❌ Not Started
 
