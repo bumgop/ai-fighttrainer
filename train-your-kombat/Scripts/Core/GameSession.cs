@@ -19,8 +19,8 @@ public partial class GameSession : Node
         _timer.StartSession();
         _telemetry.StartSession(_sessionId);
 
-        var antiAirReactionTest = GetNode<AntiAirController>("AntiAir");
-        StartMinigame(antiAirReactionTest);
+        var hitConfirmTest = GetNode<HitConfirmController>("HitConfirm");
+        StartMinigame(hitConfirmTest);
 
         GD.Print($"Session started: {_sessionId}");
     }

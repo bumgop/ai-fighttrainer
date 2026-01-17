@@ -93,7 +93,27 @@ The system is intentionally minimalist in visuals and scope to prioritize correc
 - result category
 - timing_ms (nullable, window-relative)
 
-This minigame serves as the **canonical implementation pattern** for all remaining MVP minigames.
+This minigame serves as a **canonical implementation pattern** for all remaining MVP minigames, alongside the Hit-Confirm minigame which demonstrates decision-making mechanics.
+
+### 5. Hit-Confirm Minigame (Decision-Making MVP)
+
+**Gameplay Logic**
+- Visual cue shows either "HIT" (green) or "BLOCK" (red) state
+- Player has 500ms window to decide whether to attack with front punch
+- Random delay before cue appears to prevent anticipation
+
+**Logged Outcomes**
+- correct_hit_confirm (attack on hit state)
+- false_hit_confirm (attack on block state)
+- missed_hit_confirm (no attack on hit state)
+- correct_block (no attack on block state)
+
+**Logged Metrics (per trial)**
+- outcome category
+- timing_ms (reaction time from cue to input)
+- was_hit_state (boolean for analysis)
+
+This minigame validates decision-making under uncertainty and input discipline.
 
 ---
 
@@ -101,11 +121,8 @@ This minigame serves as the **canonical implementation pattern** for all remaini
 
 ### Gameplay
 - Implement remaining MVP minigames:
-  - Hit-Confirm Challenge
   - Whiff Punish Timing
   - Defense Under Pressure
-  - Resource Management Drill
-  - (Optional) Adaptation Test
 
 ### Telemetry
 - Standardize event naming across all minigames

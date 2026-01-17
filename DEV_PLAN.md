@@ -234,14 +234,66 @@ This minigame establishes how branching outcomes are handled in telemetry.
 - Minigame end is reliably triggered
 
 #### Status
-⏳ In Progress
+✅ Complete
 
 ---
 
 ### Phase 3.2 - Whiff Punish Minigame
-(After Phase 3.1 acceptance))
+
+#### Objective
+Implement a minigame that evaluates:
+- Player ability to recognize and punish whiffed attacks
+- Ability to time a punish to land during recovery frames
+- Avoidance of premature or late punish attempts
+
+This is not reaction-only and decision-only; it is temporal opportunity recognition.
+
+#### Scope
+- Visual cue indicating enemy startup, active, and recovery frames
+- Player attack input window during recovery frames
+- Distinct outcomes for:
+	- Correct whiff punish (attack during recovery)
+	- Early whiff punish (attack during startup)
+	- Unsafe whiff punish (attack during active)
+	- Late whiff punish (attack after recovery)
+	- Missed punish (no attack at all)
+
+#### Deliverables
+
+##### 1. Whiff Punish Minigame
+- Abstract visual representation (rectangles / shapes)
+- Enemy entity performs an attack with clear frame states after a random delay
+- Player attack input window during recovery frames
+- Player action evaluated against timing windows
+- Minigame completion logic
+
+##### 2. Metrics Captured
+- outcome (listed above)
+- input_time_ms (nullable)
+- phase_at_input (startup / active / recovery / post-recovery / no input)
+- window_offset_ms (time difference from optimal punish window)
+	- Nullable if no input
+
+##### 3. Telemetry Integration
+- All attempts logged via shared telemetry system
+- Per-attempt telemetry records
+
+#### Non-Goals
+- No hitstun/frame advantage modeling
+- No movement/spacing mechanics
+- No adaptive timing windows
+- No difficulty scaling
+- No UI polish
+
+#### Acceptance Criteria
+- Player outcomes are unambigious and repeatable
+- All attempts emit exactly one result event
+- Early/correct/late/missed cases are distinguishable in telemetry
+- Timing metrics are internally consistent with TimerService
+- No new core systems are introduced
+
 #### Status
-❌ Not Started
+⏳ In Progress
 
 ---
 
