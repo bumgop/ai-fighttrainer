@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1q4kc6o8ueqq"]
+[gd_scene load_steps=4 format=3 uid="uid://c1q4kc6o8ueqq"]
 
 [ext_resource type="Script" uid="uid://br33xxqfx0mmd" path="res://Scripts/Core/GameSession.cs" id="1_r150o"]
 [ext_resource type="Script" uid="uid://ss8i7yn0vace" path="res://Scripts/Telemetry/TelemetryLogger.cs" id="2_idj7w"]
+[ext_resource type="PackedScene" uid="uid://bo7jfccfqq8mf" path="res://Scenes/Minigames/AntiAir.tscn" id="3_kln2b"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_r150o")
 
 [node name="TelemetryLogger" type="Node" parent="."]
 script = ExtResource("2_idj7w")
+
+[node name="AntiAir" parent="." instance=ExtResource("3_kln2b")]

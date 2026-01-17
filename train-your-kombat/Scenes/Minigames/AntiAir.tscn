@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo7jfccfqq8mf"]
+
+[ext_resource type="Script" uid="uid://bwd7owwhteow7" path="res://Scripts/Minigames/AntiAirController.cs" id="1_peipx"]
+
+[node name="AntiAir" type="Node"]
+script = ExtResource("1_peipx")
+
+[node name="Threat" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = -1
+anchor_top = -0.049382716
+offset_left = 64.0
+offset_top = 552.0
+offset_right = 96.0
+offset_bottom = 584.0
+color = Color(0.68, 0.13599999, 0.13599999, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Ground" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1152, 64)
+offset_top = 584.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.1584723, 0.15847233, 0.1584723, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 520.0
+offset_top = 272.0
+offset_right = 573.0
+offset_bottom = 295.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "WAIT..."
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
