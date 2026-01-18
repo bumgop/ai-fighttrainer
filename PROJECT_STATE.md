@@ -93,7 +93,7 @@ The system is intentionally minimalist in visuals and scope to prioritize correc
 - result category
 - timing_ms (nullable, window-relative)
 
-This minigame serves as a **canonical implementation pattern** for all remaining MVP minigames, alongside the Hit-Confirm and Whiff Punish minigames which demonstrate decision-making and temporal recognition mechanics.
+This minigame serves as a **canonical implementation pattern** for all remaining MVP minigames, alongside the Hit-Confirm, Whiff Punish, and Defense Under Pressure minigames which demonstrate decision-making, temporal recognition, and defensive mechanics.
 
 ### 5. Hit-Confirm Minigame (Decision-Making MVP)
 
@@ -138,13 +138,38 @@ This minigame validates decision-making under uncertainty and input discipline.
 
 This minigame evaluates temporal opportunity recognition and punish timing.
 
+### 7. Defense Under Pressure Minigame (Mixup Blocking)
+
+**Gameplay Logic**
+- Predefined attack strings (2-5 attacks per string) with randomized selection
+- Four attack types: Low (blue), Mid (yellow), High (green), Overhead (purple)
+- Each attack has startup (400ms) then impact (200ms) phases
+- Player inputs defense during impact window using block (S) and crouch (D) keys
+
+**Defense Rules**
+- Low: requires crouch block (S+D)
+- Mid: blocked by stand block (S) or crouch block (S+D)
+- High: blocked by stand block (S) or evaded by crouch (D)
+- Overhead: requires stand block (S) only
+
+**Logged Outcomes**
+- correct_block (proper blocking input)
+- correct_evade (proper evasion via crouch)
+- hit_taken (failed defense)
+
+**Logged Metrics (per attack)**
+- attack_type, expected_defense (all valid options), player_defense_input
+- outcome, input_time_ms, attack_index_in_string
+- String-level summary with total_hits and success metrics
+
+This minigame evaluates defensive fundamentals and sequential decision-making under pressure.
+
 ---
 
 ## Known Gaps / TODOs
 
 ### Gameplay
-- Implement remaining MVP minigames:
-  - Defense Under Pressure
+- All core minigames implemented
 
 ### Telemetry
 - Standardize event naming across all minigames

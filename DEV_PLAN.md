@@ -297,10 +297,86 @@ This is not reaction-only and decision-only; it is temporal opportunity recognit
 
 ---
 
-### Phase 3.3 - Defense Under Pressure Minigame
-(After Phase 3.2 acceptance)))
+### Phase 3.3 - Defense Under Pressure Minigame (Mixup Blocking)
+
+#### Objective
+Implement a minigame that evaluates:
+- Player recognition of attack types
+- Correct defensive input selection under time pressure
+- Player ability to recognize attack strings and block accordingly
+
+This minigame introduces sequential decision pressure and tests defensive fundamentals rather than reaction speed alone.
+
+#### Deliverables
+
+##### 1. Defense Under Pressure Minigame
+- Abstract visual representation of incoming attacks
+- Predefined attack strings (2-3 hits per string)
+- Randomized selection of attack strings per trial
+- Each attack clearly labeled and color-coded:
+ 	- Low
+	- Mid
+	- High
+	- Overhead
+
+##### 2. Blocking Rules Implemented (MVP)
+- Mid: blocked by Stand Block or Crouch Block
+- Low: blocked by Crouch Block
+- High: blocked by Stand Block or Crouch Block or evaded with crouch
+- Overhead: blocked by Stand Block only
+
+##### 3. Timing Model
+- Each attack has a startup window before impack
+- Startup speeds (fast -> slow):
+ 	- Low
+	- High
+	- Mid
+	- Overhead
+- Player input evaluated only during the active "impact" window
+- Failure to input defaults to "no block"
+
+##### 4. Metrics Captured (Per Hit)
+- attack_type
+- expected_defense
+- player_defense_input
+- outcome:
+	- correct_block
+	- incorrect_block
+	- correct_evade
+	- hit_taken
+- input_time_ms (relative to attack start)
+- attack_index_in_string 
+
+##### 5. String-Level Metrics
+- total_hits (number of attacks in string)
+- successful_defenses (number of hits defended correctly)
+- string_success (all hits defended correctly)
+
+##### 6. Telemetry Integration
+- One telemetry event per attack
+- One summary event per string
+- Logged via shared telemetry system
+- CSV output consistent with prior minigames
+
+#### Non-Goals (Phase 3.3)
+- No guard meter or stamina
+- No chip damage
+- No pushback or spacing
+- No adaptive or learning-based mixups
+- No difficulty scaling
+- No UI or animation polish
+
+#### Acceptance Criteria
+Phase 3.3 is considered complete when:
+- The minigame runs start-to-finish without manual intervention
+- All attack types are visually distinct and readable
+- Defensive outcomes are unambiguous and repeatable
+- Multi-hit strings resolve deterministically
+- Telemetry correctly records per-hit and per-string metrics
+- CSV data can clearly distinguish success and failure cases
+
 #### Status
-❌ Not Started
+✅ Complete
 
 ---
 
