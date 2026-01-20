@@ -93,7 +93,7 @@ The system is intentionally minimalist in visuals and scope to prioritize correc
 - result category
 - timing_ms (nullable, window-relative)
 
-This minigame serves as a **canonical implementation pattern** for all remaining MVP minigames, alongside the Hit-Confirm, Whiff Punish, and Defense Under Pressure minigames which demonstrate decision-making, temporal recognition, and defensive mechanics.
+This minigame serves as a **canonical implementation pattern** for all remaining MVP minigames, alongside the Hit-Confirm, Whiff Punish, and Defense Under Pressure minigames which demonstrate decision-making, temporal recognition, and defensive mechanics. The minigame registry system provides centralized metadata management for all implemented minigames.
 
 ### 5. Hit-Confirm Minigame (Decision-Making MVP)
 
@@ -164,12 +164,37 @@ This minigame evaluates temporal opportunity recognition and punish timing.
 
 This minigame evaluates defensive fundamentals and sequential decision-making under pressure.
 
+### 8. Minigame Registry and Metadata System
+
+**MinigameDescriptor Structure**
+- Standardized metadata for all minigames: ID, display name, scene path, description
+- Ensures telemetry IDs match registry IDs exactly
+- Provides single source of truth for minigame information
+
+**MinigameRegistry Singleton**
+- Centralized registry of all available minigames
+- Static registration at startup with no dynamic loading
+- Query methods for enumeration and lookup by ID
+- Singleton pattern for global access
+
+**MinigameLauncher**
+- Dynamic minigame loading by scene path
+- Maintains existing telemetry and session management patterns
+- Replaces hardcoded GameSession approach with flexible launcher
+
+**Architectural Benefits**
+- Menu systems can enumerate minigames without scene knowledge
+- Consistent metadata across UI and telemetry systems
+- Simplified addition of new minigames through registry updates
+- Clear separation between minigame discovery and execution
+
 ---
 
 ## Known Gaps / TODOs
 
 ### Gameplay
 - All core minigames implemented
+- Minigame registry and metadata system implemented
 
 ### Telemetry
 - Standardize event naming across all minigames
