@@ -93,7 +93,7 @@ The system is intentionally minimalist in visuals and scope to prioritize correc
 - result category
 - timing_ms (nullable, window-relative)
 
-This minigame serves as a **canonical implementation pattern** for all remaining MVP minigames, alongside the Hit-Confirm, Whiff Punish, and Defense Under Pressure minigames which demonstrate decision-making, temporal recognition, and defensive mechanics. The minigame registry system provides centralized metadata management for all implemented minigames.
+This minigame serves as a **canonical implementation pattern** for all remaining MVP minigames, alongside the Hit-Confirm, Whiff Punish, and Defense Under Pressure minigames which demonstrate decision-making, temporal recognition, and defensive mechanics. The minigame registry system provides centralized metadata management for all implemented minigames, while the main menu system enables user-friendly minigame selection and launching.
 
 ### 5. Hit-Confirm Minigame (Decision-Making MVP)
 
@@ -188,6 +188,30 @@ This minigame evaluates defensive fundamentals and sequential decision-making un
 - Simplified addition of new minigames through registry updates
 - Clear separation between minigame discovery and execution
 
+### 9. Main Menu System (Minigame Selection)
+
+**MainMenuController**
+- Loads available minigames from MinigameRegistry on startup
+- Provides Previous/Next navigation with wraparound behavior
+- Displays current minigame name and description
+- Launches selected minigame via direct scene transition
+
+**User Interface**
+- Centered layout with project title and minigame information
+- Three-button navigation: Previous, Start, Next
+- Real-time display updates during minigame cycling
+- Utilitarian design focused on functionality over aesthetics
+
+**Application Entry Point**
+- MainMenu.tscn set as project main scene
+- Replaces direct minigame launching with menu-driven selection
+- No hardcoded scene references - all navigation via registry
+
+**Architectural Integration**
+- Seamless integration with MinigameRegistry for minigame enumeration
+- Direct scene transitions maintain existing minigame architecture
+- No modifications required to existing minigame implementations
+
 ---
 
 ## Known Gaps / TODOs
@@ -195,6 +219,7 @@ This minigame evaluates defensive fundamentals and sequential decision-making un
 ### Gameplay
 - All core minigames implemented
 - Minigame registry and metadata system implemented
+- Main menu system with minigame selection implemented
 
 ### Telemetry
 - Standardize event naming across all minigames
