@@ -32,7 +32,14 @@
 - Automatic minigame discovery eliminates hardcoded scene references
 - Standardized entry/exit flow with preparation delay and clean return navigation
 
+## Analytics Pipeline
+- **Python Environment**: Isolated venv with pandas/numpy dependencies
+- **TelemetryLoader**: CSV file loading from Godot telemetry output
+- **TelemetryValidator**: Schema and structural validation with error/warning reporting
+- **Validation Pipeline**: Automated data integrity checking for ML readiness
+- **Self-Contained**: No external library dependencies, includes run_analysis.bat wrapper
+
 ## Known Gaps
-- Python ML analytics system (deferred to later phases)
+- Feature engineering and ML modeling (Phase 5.2+)
 - Advanced UI polish and visual effects
 - Additional minigame types beyond core 4 implementations
