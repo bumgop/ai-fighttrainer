@@ -42,11 +42,12 @@
 - **FeatureSelector**: Style-based feature selection for clustering (timing consistency, decision patterns)
 - **PlayerClustering**: K-Means and Gaussian Mixture Models with silhouette score evaluation
 - **Cluster Interpretation**: Automated behavioral archetype descriptions with distinctive feature analysis
+- **WeaknessClassifier**: Supervised learning models (Logistic Regression, Decision Trees) for weakness prediction
+- **Model Explainability**: Feature importance analysis and decision rule extraction for interpretable predictions
 - **Robust Error Handling**: Graceful handling of insufficient data diversity cases
 - **Feature Dictionary**: Documented feature definitions for ML explainability
-- **Integrated Pipeline**: End-to-end analysis from raw telemetry to cluster assignments
+- **Integrated Pipeline**: End-to-end analysis from raw telemetry to weakness predictions and cluster assignments
 
 ## Known Gaps
-- Supervised weakness classification models (Phase 5.4)
 - Trend analysis and improvement tracking (Phase 5.5)
 - Player-facing feedback system (Phase 6)

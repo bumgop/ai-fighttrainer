@@ -93,6 +93,34 @@ def main():
         clustering_results = None
         interpretations = None
     
+    # Weakness Classification
+    if len(sessions_df) >= 3:  # Need minimum data for supervised learning
+        print("\n=== Weakness Classification ===")
+        from weakness_classifier import WeaknessClassifier
+        
+        classifier = WeaknessClassifier()
+        labels_df = classifier.define_weakness_labels(sessions_df)
+        
+        print(f"Defined weakness labels for {len(labels_df)} sessions")
+        weakness_cols = [col for col in labels_df.columns if col != 'session_id']
+        for weakness in weakness_cols:
+            positive_cases = labels_df[weakness].sum()
+            print(f"  {weakness}: {positive_cases}/{len(labels_df)} sessions ({positive_cases/len(labels_df)*100:.1f}%)")
+        
+        training_results = classifier.train_weakness_models(sessions_df, labels_df)
+        explanations = classifier.explain_weakness_predictions(sessions_df, labels_df)
+        predictions = classifier.predict_weaknesses(sessions_df)
+        
+        print("\nWeakness model training complete")
+        for weakness, result in training_results.items():
+            if 'error' not in result:
+                print(f"  {weakness}: {result['positive_cases']} positive cases")
+    else:
+        print("\nInsufficient data for weakness classification (need >=3 sessions)")
+        training_results = None
+        explanations = None
+        predictions = None
+    
     # Save outputs
     output_dir = Path(telemetry_dir).parent / "processed"
     output_dir.mkdir(exist_ok=True)
@@ -118,12 +146,26 @@ def main():
         with open(output_dir / "cluster_interpretations.json", 'w') as f:
             json.dump(interpretations, f, indent=2)
     
+    if training_results:
+        with open(output_dir / "weakness_training_results.json", 'w') as f:
+            json.dump(training_results, f, indent=2)
+        
+        with open(output_dir / "weakness_explanations.json", 'w') as f:
+            json.dump(explanations, f, indent=2)
+        
+        with open(output_dir / "weakness_predictions.json", 'w') as f:
+            json.dump(predictions, f, indent=2)
+    
     print(f"\nAnalysis complete. Results saved to {output_dir}")
     print("  - attempt_features.csv: Per-attempt metrics")
     print("  - session_features.csv: Per-session aggregated metrics")
     if clustering_results and clustering_results.get('kmeans', {}).get('best_k') is not None:
         print("  - clustering_results.json: Clustering model performance")
         print("  - cluster_interpretations.json: Player archetype descriptions")
+    if training_results:
+        print("  - weakness_training_results.json: Model training statistics")
+        print("  - weakness_explanations.json: Feature importance and decision rules")
+        print("  - weakness_predictions.json: Per-session weakness probabilities")
 
 if __name__ == "__main__":
     main()
