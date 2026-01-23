@@ -19,7 +19,7 @@ class ValidationResult:
 
 class TelemetryValidator:
     REQUIRED_COLUMNS = ['session_id', 'minigame_id', 'event_type', 'timestamp_ms', 'payload']
-    VALID_EVENT_TYPES = ['minigame_start', 'minigame_end', 'input', 'result']
+    VALID_EVENT_TYPES = ['minigame_start', 'minigame_end', 'input', 'result', 'hit_confirm_attempt', 'anti_air_attempt', 'whiff_punish_attempt', 'defense_attack_result', 'defense_string_complete']
     VALID_MINIGAME_IDS = ['anti_air_reaction_test', 'hit_confirm_test', 'whiff_punish_test', 'defense_under_pressure_test']
     
     def validate(self, df: pd.DataFrame) -> ValidationResult:

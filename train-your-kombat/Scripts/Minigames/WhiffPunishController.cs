@@ -166,7 +166,7 @@ public partial class WhiffPunishController : MinigameBase
     {
         Telemetry.LogEvent(new TelemetryEvent
         {
-            SessionId = "",
+            SessionId = SessionId,
             MinigameId = MinigameId,
             EventType = "whiff_punish_attempt",
             TimestampMs = Timer.GetElapsedMs(),

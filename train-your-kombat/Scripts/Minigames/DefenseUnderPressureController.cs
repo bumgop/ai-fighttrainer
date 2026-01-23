@@ -63,7 +63,7 @@ public partial class DefenseUnderPressureController : MinigameBase
         _stringComplete = false;
         _attacker.Color = Colors.Gray;
 
-        _currentString = _attackStrings[GD.RandRange(0, _attackStrings.Count)];
+        _currentString = _attackStrings[GD.RandRange(0, _attackStrings.Count - 1)];
         _currentAttackIndex = 0;
 
         GetTree().CreateTimer(GD.RandRange(1.0f, 2.0f)).Timeout += StartAttackString;
@@ -179,7 +179,7 @@ public partial class DefenseUnderPressureController : MinigameBase
     {
         Telemetry.LogEvent(new TelemetryEvent
         {
-            SessionId = "",
+            SessionId = SessionId,
             MinigameId = MinigameId,
             EventType = "defense_attack_result",
             TimestampMs = Timer.GetElapsedMs(),
@@ -210,7 +210,7 @@ public partial class DefenseUnderPressureController : MinigameBase
     {
         Telemetry.LogEvent(new TelemetryEvent
         {
-            SessionId = "",
+            SessionId = SessionId,
             MinigameId = MinigameId,
             EventType = "defense_string_complete",
             TimestampMs = Timer.GetElapsedMs(),

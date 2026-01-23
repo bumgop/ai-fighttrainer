@@ -55,6 +55,7 @@ public partial class MinigameSession : Node
         }
 
         _activeMinigame.Initialize(_telemetry, _timer, OnMinigameComplete);
+        _activeMinigame.SetSessionId(_sessionId);
 
         _telemetry.LogEvent(new TelemetryEvent
         {

@@ -633,7 +633,7 @@ Phase 5.1 is considered complete when:
 
 ### Status
 
-⏳ In Progress
+✅ Complete
 
 ---
 
@@ -641,23 +641,67 @@ Phase 5.1 is considered complete when:
 
 #### Objective
 
+Transform validated raw telemetry into structured, interpretable features that represent player skill across minigames.
+
+This phase answers: "What numbers actually represent a player's fundamentals?"
+
 ---
 
 #### Deliverables
+
+##### 1. Per-Attempt Feature Extraction
+For each minigame attempt, derive:
+* Outcome flags (success / failure / partial)
+* Timing-relative metrics (e.g., error from optimal window)
+* Decision error indicators (e.g., false confirm, wrong block)
+These must be derived, not copied.
+
+##### 2. Per-Session Aggregation
+Aggregate attempt-level features into session-level metrics:
+* Means
+* Medians
+* Variance / consistency indicators
+* Error rates (per category)
+Each session becomes one row in a dataset.
+
+##### 3. Per-Minigame Skill Vectors
+For each session:
+* Producs one feature vector per minigame
+* Prefix or namespace features by minigame_id
+* Missing minigames are allowed but explicit (NaN)
+
+##### 4. Feature Dictionary
+A documented mapping:
+* Feature name → description
+* Units
+* Expected ranges
+* Interpretation
+This is critical for explainability later.
 
 ---
 
 ### Non-Goals
 
+* No ML modeling
+* No clustering
+* No labels like "good" or "bad"
+* No normalization across players
+
 ---
 
 ### Acceptance Criteria
+
+Phase 5.2 is considered complete when:
+* A single session can be transformed into a clean feature row
+* Features match gameplay intent
+* Feature meanings can be explained without referencing code
+* Output is suitable for scikit-learn ingestion
 
 ---
 
 ### Status
 
-❌ Not Started
+⏳ In Progress
 
 ---
 
@@ -665,17 +709,54 @@ Phase 5.1 is considered complete when:
 
 #### Objective
 
+Identify natural player archetypes using unsupervised learning on engineered features.
+
+This phase answers: "What kinds of players emerge from the data?"
+
 ---
 
 #### Deliverables
+
+##### 1. Feature Selection for Clustering
+* Subset features that reflect style, not performance ceiling
+* Avoid redundant or highly correlated features
+* Justify inclusion / exclusion
+
+##### 2. Clustering Models
+Implement and compare:
+* K-Means
+* Gaussian Mixture Models
+Evaluate using:
+* Silhouette Score
+* Cluster stability across runs
+
+##### 3. Cluster Interpretation
+For each cluster:
+* Compute centroid feature values
+* Describe behavioral tendencies
+	* E.g., "Cluster 2 reacts quickly but has high timing variance"
+
+##### 4. Cluster Assignment Output
+* Each session / player assigned a cluster ID
+* Output saved as CSV / JSON
 
 ---
 
 ### Non-Goals
 
+* No automatic recommendations
+* No visualization dashoboards
+* No real-time inference
+* No deep models
+
 ---
 
 ### Acceptance Criteria
+
+Phase 5.3 is considered complete when:
+* Clusters are reproducible
+* Each cluster has a defensible interpretation
+* You can explain why a player belongs to a cluster based on features
 
 ---
 
@@ -689,17 +770,54 @@ Phase 5.1 is considered complete when:
 
 #### Objective
 
+Product specific fundamental weaknesses using supervised, interpretable models.
+
+This phase answers: "Given this player's data, what are they most likely struggling with?"
+
 ---
 
 #### Deliverables
+
+##### 1. Weakness Definitions
+Define binary or ordinal labels such as:
+* "Inconsistent timing"
+* "Poor mixup defense"
+* "Late punish tendency"
+Labels must be derived from thresholds in Phase 5.2 features.
+
+##### 2. Supervised Models
+Implement:
+* Logistic Regression
+* Decision Tree (shallow)
+Train per-weakness or multi-label as appropriate.
+
+##### 3. Model Explainability
+* Feature weights (logistic)
+* Decision paths (trees)
+* Clear linkage to gameplay behavior
+
+##### 4. Weakness Prediction Output
+* Weakness probabilities or flags
+* Confidence scores
+* Saved to disk
 
 ---
 
 ### Non-Goals
 
+* No ensemble methods
+* No neural networks
+* No optimization for leaderboard-style accuracy
+* No automated coaching
+
 ---
 
 ### Acceptance Criteria
+
+Phase 5.4 is considered complete when:
+* Weakness predictions align with intuitive gameplay observations
+* Models can be explained line-by-line
+* False positives are understandable, not mysterious
 
 ---
 
@@ -713,17 +831,54 @@ Phase 5.1 is considered complete when:
 
 #### Objective
 
+Analyze how player skill changes over time, not just static ability.
+
+This phase answers: "Is the player improving, stagnating, or regressing?"
+
 ---
 
 #### Deliverables
+
+##### 1. Session Ordering
+* Sessions ordered by timestamp
+* Gaps allowed
+* Multiple sessions per day allowed
+
+##### 2. Metric Smoothing
+Apply:
+* Rolling averages
+* Exponential smoothing
+* Simple deltas (early vs late)
+
+##### 3. Trend Classification
+For key metrics:
+* Improving
+* Flat
+* Regressing
+With thresholds explicitly defined.
+
+##### 4. Trend Output
+* Per-metric trend summaries
+* Stored in machine-readable format
+* Ready for UI consumption in Phase 6
 
 ---
 
 ### Non-Goals
 
+* No forecasting
+* No goal setting
+* No player comparison
+* No live graphs
+
 ---
 
 ### Acceptance Criteria
+
+Phase 5.5 is considered complete when:
+* Trends are stable across noisy sessions
+* Improvement signals are intuitive
+* Outputs can directly feed player feedback
 
 ---
 

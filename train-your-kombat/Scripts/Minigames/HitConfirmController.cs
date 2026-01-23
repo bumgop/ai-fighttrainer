@@ -99,7 +99,7 @@ public partial class HitConfirmController : MinigameBase
     {
         Telemetry.LogEvent(new TelemetryEvent
         {
-            SessionId = "",
+            SessionId = SessionId,
             MinigameId = MinigameId,
             EventType = "hit_confirm_attempt",
             TimestampMs = Timer.GetElapsedMs(),

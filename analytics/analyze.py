@@ -4,6 +4,8 @@ import sys
 from pathlib import Path
 from telemetry_loader import TelemetryLoader
 from validator import TelemetryValidator
+from feature_extractor import FeatureExtractor
+from session_aggregator import SessionAggregator
 
 def main():
     if len(sys.argv) != 2:
@@ -44,11 +46,32 @@ def main():
         for warning in result.warnings:
             print(f"  - {warning}")
     
-    if result.is_valid():
-        print("\n✅ Validation passed")
-    else:
+    if not result.is_valid():
         print("\n❌ Validation failed")
         sys.exit(1)
+    
+    print("\n✅ Validation passed")
+    
+    # Feature Engineering
+    print("\n=== Feature Engineering ===")
+    extractor = FeatureExtractor()
+    attempts_df = extractor.extract_attempt_features(df)
+    print(f"Extracted features for {len(attempts_df)} attempts")
+    
+    aggregator = SessionAggregator()
+    sessions_df = aggregator.aggregate_session_features(attempts_df)
+    print(f"Aggregated features for {len(sessions_df)} sessions")
+    
+    # Save outputs
+    output_dir = Path(telemetry_dir).parent / "processed"
+    output_dir.mkdir(exist_ok=True)
+    
+    attempts_df.to_csv(output_dir / "attempt_features.csv", index=False)
+    sessions_df.to_csv(output_dir / "session_features.csv", index=False)
+    
+    print(f"\n📊 Features saved to {output_dir}")
+    print("  - attempt_features.csv: Per-attempt metrics")
+    print("  - session_features.csv: Per-session aggregated metrics")
 
 if __name__ == "__main__":
     main()

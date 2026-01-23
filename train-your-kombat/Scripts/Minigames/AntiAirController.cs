@@ -125,7 +125,7 @@ public partial class AntiAirController : MinigameBase
     {
         Telemetry.LogEvent(new TelemetryEvent
         {
-            SessionId = "",
+            SessionId = SessionId,
             MinigameId = MinigameId,
             EventType = "anti_air_attempt",
             TimestampMs = Timer.GetElapsedMs(),

@@ -8,9 +8,10 @@
 - **TimerService**: Session-relative timing for performance measurement
 
 ### Minigame System
-- **MinigameBase**: Abstract base class with Initialize/StartMinigame/EndMinigame contract
+- **MinigameBase**: Abstract base class with Initialize/StartMinigame/EndMinigame contract and proper session ID tracking
 - **MinigameRegistry**: Singleton registry containing metadata for all minigames (ID, display name, scene path, description)
 - **Completion Flow**: Minigames signal completion via RequestEnd callback, triggering return button display
+- **Session ID Management**: Consistent session tracking across all telemetry events
 
 ### User Interface
 - **MainMenuController**: Menu navigation with Previous/Next/Start buttons for minigame selection
@@ -36,10 +37,13 @@
 - **Python Environment**: Isolated venv with pandas/numpy dependencies
 - **TelemetryLoader**: CSV file loading from Godot telemetry output
 - **TelemetryValidator**: Schema and structural validation with error/warning reporting
+- **FeatureExtractor**: Per-attempt feature extraction from minigame events with outcome classification
+- **SessionAggregator**: Per-session skill metrics aggregation (means, rates, consistency measures)
+- **Feature Dictionary**: Documented feature definitions for ML explainability
 - **Validation Pipeline**: Automated data integrity checking for ML readiness
 - **Self-Contained**: No external library dependencies, includes run_analysis.bat wrapper
 
 ## Known Gaps
-- Feature engineering and ML modeling (Phase 5.2+)
+- Advanced ML modeling and clustering (Phase 5.3+)
 - Advanced UI polish and visual effects
 - Additional minigame types beyond core 4 implementations

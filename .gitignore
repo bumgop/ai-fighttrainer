@@ -5,3 +5,4 @@
 /.vs
 /train-your-kombat/.vs
 /analytics/venv
+/analytics/__pycache__
