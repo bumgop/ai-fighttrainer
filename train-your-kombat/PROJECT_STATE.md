@@ -44,10 +44,11 @@
 - **Cluster Interpretation**: Automated behavioral archetype descriptions with distinctive feature analysis
 - **WeaknessClassifier**: Supervised learning models (Logistic Regression, Decision Trees) for weakness prediction
 - **Model Explainability**: Feature importance analysis and decision rule extraction for interpretable predictions
+- **TrendAnalyzer**: Longitudinal analysis with session ordering, metric smoothing, and trend classification
+- **Improvement Tracking**: Rolling averages, exponential smoothing, and trend assessment (improving/flat/regressing)
 - **Robust Error Handling**: Graceful handling of insufficient data diversity cases
 - **Feature Dictionary**: Documented feature definitions for ML explainability
-- **Integrated Pipeline**: End-to-end analysis from raw telemetry to weakness predictions and cluster assignments
+- **Integrated Pipeline**: End-to-end analysis from raw telemetry to trends, weaknesses, and cluster assignments
 
 ## Known Gaps
-- Trend analysis and improvement tracking (Phase 5.5)
 - Player-facing feedback system (Phase 6)

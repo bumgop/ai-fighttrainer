@@ -121,6 +121,30 @@ def main():
         explanations = None
         predictions = None
     
+    # Trend Analysis
+    if len(sessions_df) >= 2:  # Need at least 2 sessions for trends
+        print("\n=== Trend Analysis ===")
+        from trend_analyzer import TrendAnalyzer
+        
+        analyzer = TrendAnalyzer()
+        trend_results = analyzer.analyze_trends(sessions_df)
+        
+        if 'error' in trend_results:
+            print(f"Trend analysis failed: {trend_results['error']}")
+            trend_results = None
+        else:
+            print(f"Analyzed trends across {trend_results['session_count']} sessions")
+            print(f"Metrics analyzed: {len(trend_results['metrics_analyzed'])}")
+            
+            overall = trend_results['trend_summaries']['overall']
+            print(f"\nOverall assessment: {overall['overall_assessment']}")
+            print(f"  Improving: {overall['improving_count']} metrics")
+            print(f"  Stable: {overall['flat_count']} metrics")
+            print(f"  Regressing: {overall['regressing_count']} metrics")
+    else:
+        print("\nInsufficient data for trend analysis (need >=2 sessions)")
+        trend_results = None
+    
     # Save outputs
     output_dir = Path(telemetry_dir).parent / "processed"
     output_dir.mkdir(exist_ok=True)
@@ -156,6 +180,10 @@ def main():
         with open(output_dir / "weakness_predictions.json", 'w') as f:
             json.dump(predictions, f, indent=2)
     
+    if trend_results:
+        with open(output_dir / "trend_analysis.json", 'w') as f:
+            json.dump(trend_results, f, indent=2)
+    
     print(f"\nAnalysis complete. Results saved to {output_dir}")
     print("  - attempt_features.csv: Per-attempt metrics")
     print("  - session_features.csv: Per-session aggregated metrics")
@@ -166,6 +194,8 @@ def main():
         print("  - weakness_training_results.json: Model training statistics")
         print("  - weakness_explanations.json: Feature importance and decision rules")
         print("  - weakness_predictions.json: Per-session weakness probabilities")
+    if trend_results:
+        print("  - trend_analysis.json: Improvement trends and performance trajectories")
 
 if __name__ == "__main__":
     main()
