@@ -34,16 +34,19 @@
 - Standardized entry/exit flow with preparation delay and clean return navigation
 
 ## Analytics Pipeline
-- **Python Environment**: Isolated venv with pandas/numpy dependencies
+- **Python Environment**: Isolated venv with scikit-learn/pandas/numpy dependencies
 - **TelemetryLoader**: CSV file loading from Godot telemetry output
 - **TelemetryValidator**: Schema and structural validation with error/warning reporting
 - **FeatureExtractor**: Per-attempt feature extraction from minigame events with outcome classification
 - **SessionAggregator**: Per-session skill metrics aggregation (means, rates, consistency measures)
+- **FeatureSelector**: Style-based feature selection for clustering (timing consistency, decision patterns)
+- **PlayerClustering**: K-Means and Gaussian Mixture Models with silhouette score evaluation
+- **Cluster Interpretation**: Automated behavioral archetype descriptions with distinctive feature analysis
+- **Robust Error Handling**: Graceful handling of insufficient data diversity cases
 - **Feature Dictionary**: Documented feature definitions for ML explainability
-- **Validation Pipeline**: Automated data integrity checking for ML readiness
-- **Self-Contained**: No external library dependencies, includes run_analysis.bat wrapper
+- **Integrated Pipeline**: End-to-end analysis from raw telemetry to cluster assignments
 
 ## Known Gaps
-- Advanced ML modeling and clustering (Phase 5.3+)
-- Advanced UI polish and visual effects
-- Additional minigame types beyond core 4 implementations
+- Supervised weakness classification models (Phase 5.4)
+- Trend analysis and improvement tracking (Phase 5.5)
+- Player-facing feedback system (Phase 6)
