@@ -959,7 +959,7 @@ Phase 6.1 is considered complete when:
 
 ### Status
 
-⏳ In Progress
+✅ Complete
 
 ---
 
@@ -1014,7 +1014,7 @@ Phase 6.2 is considered complete when:
 
 ### Status
 
-❌ Not Started
+⏳ In Progress
 
 ---
 

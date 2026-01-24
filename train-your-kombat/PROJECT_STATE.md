@@ -50,5 +50,14 @@
 - **Feature Dictionary**: Documented feature definitions for ML explainability
 - **Integrated Pipeline**: End-to-end analysis from raw telemetry to trends, weaknesses, and cluster assignments
 
+## Player Feedback System
+- **InsightContract**: Structured taxonomy of 10 insight types with canonical vocabulary definitions
+- **InsightVocabulary**: Plain-language definitions, behavior causes, and supporting metrics for each insight type
+- **InsightDataStructure**: Structured format with severity levels, confidence levels, contributing factors, and explanations
+- **ML Source Mapping**: Explicit mapping between analytics components and insight types they can generate
+- **Validation System**: Ensures insights are traceable to specific data points and have required supporting evidence
+
 ## Known Gaps
-- Player-facing feedback system (Phase 6)
+- Insight generation logic (Phase 6.2)
+- Player-facing feedback presentation (Phase 6.3)
+- Actionable guidance system (Phase 6.4)
