@@ -888,36 +888,243 @@ Phase 5.5 is considered complete when:
 
 ---
 
-## Phase 6 — Player Feedback & Reporting
+## Phase 6 - Player Insight, Feedback, and Explainability
 
 ### Objective
 
-Convert analytics output into clear, actionable player-facing feedback.
+Translate analytics and ML outputs into clear, trustworth, player-facing insight that explains:
+* What the player struggles with
+* Why the system believes so
+* How the player can improve
+
+This phase closes the loop from data capture to actionable feedback.
 
 ---
 
-### Deliverables
+### Phase 6.1 — Insight Contract and Vocabulary
 
-* Text-based feedback summaries
-* Weakness callouts
-* Improvement trends over time
+#### Objective
+
+Define a shared language between analyticsm ML outputs, and player-facing feedback.
+
+This prevents vague or hand-wavy explanations.
+
+---
+
+#### Deliverables
+
+##### 1. Insight Taxonomy
+A fixed set of insight types, for example:
+* Timing inconsistency
+* Late reactions
+* Poor mixup defense
+* High variance decision-making
+Each insight must map directly to:
+* One or more engineered features
+* One or more ML outputs
+
+##### 2. Vocabulary Definitions
+For each insight type, define:
+* Plain-language definitions
+* What behavior causes it
+* What metrics support it
+This vocabulary becomes canonical.
+
+##### 3. Insight Data Structure
+Define a structured format (JSON or C# model) such as:
+* insight_id
+* severity / confidence
+* contributing_factors
+* explanation_text
 
 ---
 
 ### Non-Goals
 
-* No real-time inference
-* No advanced UI or visualization
+* No UI
+* No visuals
+* No generation logic
+* No prioritization
 
 ---
 
 ### Acceptance Criteria
 
-* Feedback is understandable without developer explanation
-* Output clearly maps to underlying analytics
+Phase 6.1 is considered complete when:
+* Every ML output can be expressed as a named insight
+* Every insight has a clear definition
+* No insight requires guessing to explain
+
+---
+
+### Status
+
+⏳ In Progress
+
+---
+
+### Phase 6.2 — Insight Generation Logic
+
+#### Objective
+
+Convert ML outputs into concrete insight objects using deterministic logic.
+
+This phase answers: "Given the data and models, what should we say?"
+
+---
+
+#### Deliverables
+
+##### 1. Mapping Logic
+Explicit rules that map:
+* Cluster assignments
+* Weakness probabilities
+* Trend classifications
+to insight objects defined in Phase 6.1.
+
+##### 2. Confidence and Severity Handling
+* Normalize confidence levels
+* Avoid binary "good/bad" framing
+* Support "emerging weakness" vs "established weakness"
+
+##### 3. Cross-Minigame Attribution
+Insights should reference:
+* Which minigames contributed
+* Which behaviors triggered flags
+
+---
+
+### Non-Goals
+
+* No natural language generation models
+* No UI rendering
+* No player customization
+* No recommendations
+
+---
+
+### Acceptance Criteria
+
+Phase 6.2 is considered complete when:
+* Insights are generated reproducibly from analytics outputs
+* Each insight is traceable to specific data points
+* False positives can be explained
 
 ---
 
 ### Status
 
 ❌ Not Started
+
+---
+
+### Phase 6.3 — Player-Facing Feedback Presentation
+
+#### Objective
+
+Present insights to the palyer in a minimal, readable, non-overwhelming format.
+
+This phase answers: "How does a human consume this information?"
+
+---
+
+#### Deliverables
+
+##### 1. Feedback Surface
+One or more of:
+* End-of-session summary screen
+* Post-minigame insight panel
+* Simple scrollable list
+Text-first. Visuals optional.
+
+##### 2. Insight Prioritization
+* Limit number of insights shown at once
+* Order by severity or confidence
+* Avoid overwhelming the player
+
+##### 3. Supporting Context
+For each insight:
+* Brief explanation
+* Referenced minigames or behaviors
+* Optional metric values (if helpful)
+
+---
+
+### Non-Goals
+
+* No charts unless strictly necessary
+* No historical graphs
+* No gamification
+* No progress bars
+
+---
+
+### Acceptance Criteria
+
+Phase 6.3 is considered complete when:
+* A player can understand their feedback in under 60 seconds
+* No insight feels arbitrary
+* Feedback aligns with player intuition
+
+---
+
+### Status
+
+❌ Not Started
+
+---
+
+### Phase 6.4 — Actionable Guidance and Framing
+
+#### Objective
+
+Convert insights into clear, bounded next steps without turning the system into a coach simulator.
+
+This phase answers: "What should the player do next?"
+
+---
+
+#### Deliverables
+
+##### 1. Recommendation Templates
+For each insight:
+* 1-2 actionable suggestions
+* Referencing existing minigames only
+Example: "Spend time on the Whiff Punish minigame focusing on late recovery windows."
+
+##### 2. Framing and Tone
+* Non-judgemental
+* Skill-focused
+* Improvement-oriented
+No scoring or ranking
+
+##### 3. Insight-to-Action Mapping
+Explicit link between:
+* Insight -> Recommendation
+* Metric -> Suggested focus
+
+---
+
+### Non-Goals
+
+* No adaptive training plans
+* No scheduling
+* No difficulty adjustment
+* No personalization beyond insight mapping
+
+---
+
+### Acceptance Criteria
+
+Phase 6.4 is considered complete when:
+* Every surfaced insight includes a clear next step
+* Recommendations are realistic and bounded
+* Players understand why the recommendation exists
+
+---
+
+### Status
+
+❌ Not Started
+
+
